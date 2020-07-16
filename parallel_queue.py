@@ -53,8 +53,8 @@ def consumer(queue_comp: Queue, queue_resp: Queue, processing: list):
         processing.append(comp)
         comp_names = get_comp(comp)
         synergy = calc_synergy(comp_names)
-        remaining = validate_synergy(synergy)
-        queue_resp.put((remaining == 0, comp))
+        valid = validate_synergy(synergy)
+        queue_resp.put((valid, comp))
         processing.remove(comp)
 
 
@@ -101,7 +101,6 @@ def process_resp(queue_resp: Queue, lock: Lock):
         if valid:
             comp_names = get_comp(comp)
             synergy = calc_synergy(comp_names)
-            print(comp_names, synergy)
             lock.acquire()
             with open(COMPS_FILE, 'a+') as f:
                 f.write(

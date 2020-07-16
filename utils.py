@@ -1,4 +1,4 @@
-from champions import champions
+from champions import champions, sorted_champions_list
 from synergies import synergies
 
 
@@ -11,24 +11,25 @@ def calc_synergy(comp):
 
 
 def validate_synergy(synergy):
-    remaining = 0
+    # remaining = 0
     for syn, count in synergy.items():
         if count not in synergies[syn]:
-            for s in synergies[syn]:
-                diff = count - s
-                # print(diff, count, s, syn)
-                if diff < 0:
-                    remaining += -diff
-                    break
-        # print('syn', syn, count, count in synergies[syn])
-        # if count not in synergies[syn]:
-        #     return False
-    return remaining / 2
+            return False
+            # diff = 0
+            # for s in synergies[syn]:
+            #     diff = count - s
+            #     print(diff, count, s, syn)
+            # if diff < 0:
+            #     remaining += -diff
+            #     break
+            # if diff > 0:
+            #     remaining += diff
+    # return remaining / 2
+    return True
 
 
 def get_comp(comp):
-    champions_list = sorted(champions.keys())
-    return [champions_list[c - 1] for c in comp if c > 0]
+    return [sorted_champions_list[c - 1] for c in comp if c > 0]
 
 
 def next_comp(comp, i=0):

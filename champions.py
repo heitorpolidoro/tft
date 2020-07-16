@@ -59,3 +59,4 @@ champions = {
 }
 
 champions_size = len(champions)
+sorted_champions_list = sorted(champions.keys())
